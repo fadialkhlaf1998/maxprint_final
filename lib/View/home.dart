@@ -282,7 +282,7 @@ class Home extends StatelessWidget {
           const SizedBox(height: 5),
           Container(
             width: MediaQuery.of(context).size.width,
-            height: MediaQuery.of(context).size.height * 0.16,
+            height: MediaQuery.of(context).size.height * 0.15,
             decoration: const BoxDecoration(
                 image: DecorationImage(
                     image: AssetImage('assets/home/homePicture.PNG',),
