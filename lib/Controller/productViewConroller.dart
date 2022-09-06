@@ -148,23 +148,18 @@ class ProductViewController extends GetxController {
       allDesign.add(UploadDesign.fromJson(elm));
     }
     print(allDesign.length);
-
-
-
-
-    // return json.decode(uploadsDesign);
     return allDesign;
   }
   
-  checkProductId(int id) async {
+  checkProductId(int id, context, product) async {
     List<UploadDesign> loadDesignList = await loadUploadDesign();
     for(var upload in loadDesignList){
       if(upload.productId == id){
-        print('can add to cart');
+        addToCart(context, product);
         return;
       }
     }
-    print('you must upload design');
+    AppWidget.errorMsg(context, App_Localization.of(context).translate('you_must_upload_design'));
   }
 
 }

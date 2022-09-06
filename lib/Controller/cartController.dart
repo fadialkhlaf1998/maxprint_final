@@ -105,4 +105,10 @@ class CartController extends GetxController {
     getTotal();
   }
 
+  clearUploadDesignUrls() async {
+    await SharedPreferences.getInstance().then((prefs){
+      prefs.remove("uploadDesign");
+    });
+  }
+
 }

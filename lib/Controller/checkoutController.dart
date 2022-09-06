@@ -69,9 +69,9 @@ class CheckoutController extends GetxController {
     }
   }
   addOrder(BuildContext context){
-    Connector.add_order(cartController.line_items_api,Global.customer!.firstName!,
-        Global.customer!.lastName!, address1.text, address2.text,
-        "+971 "+phone.text,emirate.value, country.value,Global.customer!.id!).then((value) {
+    Connector.add_order(cartController.line_items_api,Global.user!.firstName,
+        Global.user!.lastName, address1.text, address2.text,
+        "+971 ${phone.text}",emirate.value, country.value,Global.user!.id).then((value) {
     });
   }
 

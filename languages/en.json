@@ -196,5 +196,6 @@
     "request_failed" : "please try again",
     "optional": "Optional",
     "add_more" : "Add more",
-    "upload" : "Upload"
+    "upload" : "Upload",
+  "you_must_upload_design" : "You must upload design first"
 }

@@ -510,7 +510,7 @@ class ProductView extends StatelessWidget {
               onPressed: () async {
                 /// todo
                 /// check if i upload design to this order
-                productController.checkProductId(product.id!);
+                productController.checkProductId(product.id!, context, product);
                  // await Global.getUploadDesignUrls().then((value){
                  //   print('-------------------');
                  //   print(value.urlsList.length);

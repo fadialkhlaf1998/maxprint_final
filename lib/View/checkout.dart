@@ -51,8 +51,11 @@ class Checkout extends StatelessWidget {
   _header(BuildContext context) {
     return Container(
         width: MediaQuery.of(context).size.width,
-        height: MediaQuery.of(context).size.height * 0.1,
-        color: AppColors.mainColor,
+        height: MediaQuery.of(context).size.height * 0.08,
+        decoration: BoxDecoration(
+          color: AppColors.mainColor,
+          border: Border.all(width: 1, color: Colors.grey.withOpacity(0.5))
+        ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
@@ -60,9 +63,9 @@ class Checkout extends StatelessWidget {
                 onPressed: () {
               //    Get.back();
                 },
-                icon: const Icon(Icons.arrow_back,size: 35,)),
+                icon: const Icon(Icons.arrow_back,size: 28,)),
             AppWidget.appText(App_Localization.of(context).translate("checkout"),
-                Colors.black, 25, FontWeight.bold),
+                Colors.black, 20, FontWeight.bold),
             IconButton(
                 onPressed: () {
                   //menu
@@ -85,19 +88,20 @@ class Checkout extends StatelessWidget {
               AppWidget.successMsg(context,App_Localization.of(context).translate("order_saved"));
               Get.back();
               cartController.clearCart();
+              cartController.clearUploadDesignUrls();
             },
             child: Container(
               height: 50,
               width: MediaQuery.of(context).size.width*0.35,
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(30),
-                  border: Border.all(color: AppColors.mainColor,width: 2),
-                  color: AppColors.mainColor
+                  border: Border.all(color: Colors.grey.withOpacity(0.5),width: 2),
+                  color: AppColors.mainColor,
               ),
               child: Center(
                   child: AppWidget.appText(
                     App_Localization.of(context).translate("done"),
-                  Colors.black, 18, FontWeight.normal)
+                  Colors.black, 15, FontWeight.bold)
               ),
             ),
           ),
@@ -111,7 +115,7 @@ class Checkout extends StatelessWidget {
               checkoutController.back();
             },
             child: Container(
-              height: 50,
+              height: 45,
               width: MediaQuery.of(context).size.width * 0.35,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(30),
@@ -120,7 +124,7 @@ class Checkout extends StatelessWidget {
               child: Center(
                   child: AppWidget.appText(
                       App_Localization.of(context).translate("back"),
-                      Colors.black, 18, FontWeight.normal)
+                      Colors.black, 15, FontWeight.normal)
               ),
             ),
           ),
@@ -129,17 +133,17 @@ class Checkout extends StatelessWidget {
               checkoutController.next(context);
             },
             child: Container(
-              height: 50,
+              height: 45,
               width: MediaQuery.of(context).size.width*0.35,
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(30),
-                  border: Border.all(color: AppColors.mainColor,width: 2),
-                  color: AppColors.mainColor
+                  border: Border.all(color: Colors.grey.withOpacity(0.5),width: 2),
+                  color: AppColors.mainColor,
               ),
               child: Center(
                   child: AppWidget.appText(
                       App_Localization.of(context).translate("next"),
-                      Colors.black, 18, FontWeight.normal)
+                      Colors.black, 15, FontWeight.normal)
               ),
             ),
           ),
@@ -251,7 +255,7 @@ class Checkout extends StatelessWidget {
                               decoration: InputDecoration(
                                   hintText: App_Localization.of(context).translate("phone"),
                                   hintStyle: const TextStyle(color:Colors.black, fontSize:15),
-                                  prefix: const Text("+971"),
+                                  prefix: const Text("+971 "),
                                   prefixStyle: const TextStyle(color: Colors.transparent,fontSize: 15),
                                   enabledBorder: checkoutController.noAddress.value&&checkoutController.phoneValidate.value?const UnderlineInputBorder(borderSide: BorderSide(color: Colors.red)):const UnderlineInputBorder(borderSide: BorderSide(color: Colors.grey)),
                                   focusedBorder: UnderlineInputBorder(borderSide: BorderSide(color: AppColors.mainColor))
@@ -281,7 +285,7 @@ class Checkout extends StatelessWidget {
         SizedBox(
             width: MediaQuery.of(context).size.width * 0.95,
             child: Padding(
-              padding: const EdgeInsets.all(15),
+              padding: const EdgeInsets.all(25),
               child: AppWidget.appText(
                   App_Localization.of(context).translate("payment"),
                   Colors.black, 25, FontWeight.normal),
@@ -318,10 +322,10 @@ class Checkout extends StatelessWidget {
         SizedBox(
             width: MediaQuery.of(context).size.width * 0.95,
             child: Padding(
-              padding: const EdgeInsets.all(15),
+              padding: const EdgeInsets.all(25),
               child: AppWidget.appText(
                   App_Localization.of(context).translate("summary"),
-                  Colors.black, 25, FontWeight.normal),
+                  Colors.black, 20, FontWeight.normal),
             )
         ),
         Padding(
@@ -363,11 +367,11 @@ class Checkout extends StatelessWidget {
                           child: SizedBox(
                             width: MediaQuery.of(context).size.width * 0.4,
                             child: Text(
-                              App_Localization.of(context).translate("title") + ": " +  cartController.myOrd[index].product.value.title.toString(),
+                              "${App_Localization.of(context).translate("title")}: ${cartController.myOrd[index].product.value.title}",
                               style: const TextStyle(
                                 overflow: TextOverflow.ellipsis,
                                 color: Colors.black,
-                                fontSize: 14,
+                                fontSize: 12,
                               ),
                             ),
                           ),
@@ -375,15 +379,14 @@ class Checkout extends StatelessWidget {
                         Expanded(
                           flex: 1,
                           child:  AppWidget.appText(
-                              App_Localization.of(context).translate("price") + ": " + cartController.myOrd[index].product.value.variants!.first.price!.toString() + " " +
-                                  App_Localization.of(context).translate("AED"),
-                              Colors.black, 14, FontWeight.normal),
+                              "${App_Localization.of(context).translate("price")}: ${cartController.myOrd[index].product.value.variants!.first.price!} ${App_Localization.of(context).translate("AED")}",
+                              Colors.black, 12, FontWeight.normal),
                         ),
                         Expanded(
                           flex: 1,
                           child: AppWidget.appText(
-                              App_Localization.of(context).translate("quantity") + ": " + cartController.myOrd[index].quantity.toString(),
-                              Colors.black, 14, FontWeight.normal),
+                              "${App_Localization.of(context).translate("quantity")}: ${cartController.myOrd[index].quantity}",
+                              Colors.black, 12, FontWeight.normal),
                         ),
                       ],
                     ),
@@ -398,7 +401,8 @@ class Checkout extends StatelessWidget {
           width: MediaQuery.of(context).size.width * 0.8,
           decoration: BoxDecoration(
             color: AppColors.mainColor,
-            borderRadius: BorderRadius.circular(30)
+            borderRadius: BorderRadius.circular(30),
+            border: Border.all(width: 1, color: Colors.grey.withOpacity(0.5))
           ),
           child: Padding(
             padding: const EdgeInsets.all(15),
@@ -407,8 +411,8 @@ class Checkout extends StatelessWidget {
               children: [
                 AppWidget.appText(
                     App_Localization.of(context).translate("total"),
-                    Colors.black, 20, FontWeight.bold),
-                AppWidget.appText(cartController.getTotal().toString(), Colors.black, 20, FontWeight.bold),
+                    Colors.black, 16, FontWeight.bold),
+                AppWidget.appText(cartController.getTotal().toString(), Colors.black, 16, FontWeight.bold),
               ],
             ),
           ),

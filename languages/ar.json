@@ -195,5 +195,7 @@
     "request_failed" : "يرجى المحاولة مرة أخرى",
     "optional": "اختياري",
   "add_more" : "أضف المزيد",
-  "upload" : "تحميل"
+  "upload" : "تحميل",
+  "you_must_upload_design" : "يجب عليك تحميل تصميم أولاً"
+
 }
