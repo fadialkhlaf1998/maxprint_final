@@ -73,28 +73,5 @@ class Global {
     }
   }
 
-  static saveUploadDesignUrls(String note, List<String> designsUrls) async {
-    SharedPreferences.getInstance().then((prefs) {
-      prefs.setString('note', note);
-      prefs.setStringList('designUrls', designsUrls);
-    });
-  }
-
-  static Future<LoadDesignData> getUploadDesignUrls() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    String note = prefs.getString('note') ?? '';
-    List<String> designUrls = prefs.getStringList('designUrls') ?? [];
-    return LoadDesignData(note, designUrls);
-  }
-
-}
-
-
-class LoadDesignData{
-
-  String note;
-  List<String> urlsList;
-
-  LoadDesignData(this.note, this.urlsList);
 
 }

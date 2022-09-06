@@ -462,7 +462,7 @@ class ProductView extends StatelessWidget {
         ),
         GestureDetector(
           onTap: (){
-            productController.uploadFileToServer();
+            productController.uploadFileToServer(product.id!);
           },
           child: Container(
             width: MediaQuery.of(context).size.width * 0.4,
@@ -508,16 +508,19 @@ class ProductView extends StatelessWidget {
             ),
             child: IconButton(
               onPressed: () async {
-                 await Global.getUploadDesignUrls().then((value){
-                   print('-------------------');
-                   print(value.urlsList.length);
-                   print('-------------------');
-                   if(value.urlsList.isNotEmpty){
-                     productController.addToCart(context,product);
-                   }else{
-                     showDialog(context);
-                   }
-                 });
+                /// todo
+                /// check if i upload design to this order
+                productController.checkProductId(product.id!);
+                 // await Global.getUploadDesignUrls().then((value){
+                 //   print('-------------------');
+                 //   print(value.urlsList.length);
+                 //   print('-------------------');
+                 //   if(value.urlsList.isNotEmpty){
+                 //     productController.addToCart(context,product);
+                 //   }else{
+                 //     showDialog(context);
+                 //   }
+                 // });
               },
               icon: Icon(Icons.shopping_cart_outlined,size: 25,color: AppColors.mainColor),
             ),

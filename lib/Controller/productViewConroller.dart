@@ -10,6 +10,7 @@ import 'package:maxprint_final/Controller/cartController.dart';
 import 'package:maxprint_final/Controller/wishlistController.dart';
 import 'package:maxprint_final/Helper/global.dart';
 import 'package:maxprint_final/Model/Product.dart';
+import 'package:maxprint_final/Model/uploadDesign.dart';
 import 'package:maxprint_final/View/productView.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -105,17 +106,65 @@ class ProductViewController extends GetxController {
     });
   }
 
-  uploadFileToServer() async {
+  uploadFileToServer(int productId) async {
     await Api.uploadPhoto(uploadFiles).then((value) async {
       if(value.isNotEmpty){
         print('Success');
+        await saveUploadDesignUrls(productId, value);
         uploadFiles.clear();
         uploadFileCheck.value = true;
-        await Global.saveUploadDesignUrls('note', value);
+        // await saveUploadDesignUrls(productId, value);
       }else{
         print('Field');
       }
     });
+  }
+
+
+  saveUploadDesignUrls(int productId, List<String> designsUrls) async {
+
+    /// todo
+    /// get list of uploadDesign Model
+    List<UploadDesign> loadDesignList = await loadUploadDesign();
+    loadDesignList.add(UploadDesign(productId: productId, designsUrls: designsUrls));
+    /// save new list
+    SharedPreferences.getInstance().then((prefs) {
+      prefs.setString("uploadDesign", json.encode(loadDesignList));
+    });
+
+  }
+
+  Future<List<UploadDesign>> loadUploadDesign() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String? uploadsDesign = prefs.getString('uploadDesign') ?? '';
+    if(uploadsDesign ==''){
+      return [];
+    }
+    var list = json.decode(uploadsDesign) as List;
+    List<UploadDesign> allDesign = <UploadDesign>[];
+    for(var elm in list){
+      print('-*-*-*-*-');
+      print(elm);
+      allDesign.add(UploadDesign.fromJson(elm));
+    }
+    print(allDesign.length);
+
+
+
+
+    // return json.decode(uploadsDesign);
+    return allDesign;
+  }
+  
+  checkProductId(int id) async {
+    List<UploadDesign> loadDesignList = await loadUploadDesign();
+    for(var upload in loadDesignList){
+      if(upload.productId == id){
+        print('can add to cart');
+        return;
+      }
+    }
+    print('you must upload design');
   }
 
 }
