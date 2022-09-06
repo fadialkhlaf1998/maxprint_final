@@ -28,6 +28,12 @@
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
 	<string>Main</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+        <string>Program requires GPS to track cars and job orders</string>
+        <key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+        <string>Program requires GPS to track cars and job orders</string>
+        <key>NSLocationWhenInUseUsageDescription</key>
+        <string>Program requires GPS to track cars and job orders</string>
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
