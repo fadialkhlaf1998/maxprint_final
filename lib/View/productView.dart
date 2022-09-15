@@ -11,7 +11,7 @@ import 'package:maxprint_final/Const/app_localization.dart';
 import 'package:maxprint_final/Const/app_widget.dart';
 import 'package:maxprint_final/Const/appcolors.dart';
 import 'package:maxprint_final/Controller/homeController.dart';
-import 'package:maxprint_final/Controller/productViewConroller.dart';
+import 'package:maxprint_final/Controller/productViewController.dart';
 import 'package:maxprint_final/Controller/wishlistController.dart';
 import 'package:maxprint_final/Helper/global.dart';
 import 'package:maxprint_final/Model/Product.dart';

@@ -7,6 +7,7 @@ import 'package:maxprint_final/Model/Collection.dart';
 import 'package:maxprint_final/Model/Product.dart';
 import 'package:maxprint_final/View/home.dart';
 import 'package:maxprint_final/View/noInternet.dart';
+import 'package:maxprint_final/View/signIn.dart';
 import 'package:maxprint_final/View/welcome.dart';
 
 class IntroController extends GetxController {
@@ -55,7 +56,7 @@ class IntroController extends GetxController {
   move(){
   Global.loadInfo().then((info) {
     if(info.email=="non"){
-      Get.offAll(()=>const Welcome());
+      Get.offAll(()=> SignIn());
     }else{
       Connector.check_internet().then((internet) {
         if(internet){
@@ -63,7 +64,7 @@ class IntroController extends GetxController {
             if(value!= null){
                 Get.offAll(()=>Home());
             }else{
-              Get.offAll(()=>const Welcome());
+              Get.offAll(()=> SignIn());
             }
           });
         }else{

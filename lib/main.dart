@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 import 'dart:math';
 import 'package:maxprint_final/Const/app_localization.dart';
 import 'package:maxprint_final/Controller/cartController.dart';
-import 'package:maxprint_final/Controller/productViewConroller.dart';
+import 'package:maxprint_final/Controller/productViewController.dart';
 import 'package:maxprint_final/Controller/wishlistController.dart';
 import 'package:maxprint_final/Helper/global.dart';
 import 'package:maxprint_final/View/introduction.dart';
