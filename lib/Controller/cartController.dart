@@ -1,7 +1,9 @@
 import 'package:get/get.dart';
 import 'package:maxprint_final/Api/connector.dart';
 import 'package:maxprint_final/Controller/homeController.dart';
+import 'package:maxprint_final/Controller/introductionController.dart';
 import 'package:maxprint_final/Helper/global.dart';
+import 'package:maxprint_final/Model/Collection.dart';
 import 'package:maxprint_final/Model/LineItem.dart';
 import 'package:maxprint_final/Model/MyOrder.dart';
 import 'package:maxprint_final/Model/Order.dart';
@@ -17,17 +19,17 @@ class CartController extends GetxController {
   double sub_total=0.0,shipping = 0.0 ;
   var myOrd = <MyOrder>[].obs;
   List <LineItem> line_items_api = <LineItem>[];
-  HomeController homeController = Get.find();
+  // IntroController homeController = Get.find();
 
 
-  int getCollectionId(String tag){
-    for(int i=0 ;i <homeController.collection.length;i++){
+  int getCollectionId(List<Collection> collection,String tag){
+    for(int i=0 ;i <collection.length;i++){
 
-      if(homeController.collection[i].rules != null){
+      if(collection[i].rules != null){
         print('*-*-*');
-        for(int j = 0 ;j<homeController.collection[i].rules!.length;j++){
-          if(homeController.collection[i].rules![j].condition!=null && tag.contains(homeController.collection[i].rules[j].condition!)){
-            return homeController.collection[i].id!;
+        for(int j = 0 ;j<collection[i].rules!.length;j++){
+          if(collection[i].rules![j].condition!=null && tag.contains(collection[i].rules![j].condition!)){
+            return collection[i].id!;
           }
         }
       }
@@ -114,7 +116,7 @@ class CartController extends GetxController {
         }
         //todo collection_id
         for(int elm in priceRule.entitledCollectionIds){
-          if(elm == getCollectionId(product.tags!)){
+          if(elm == getCollectionId(Connector.collections,product.tags!)){
             return qtySubTotalCondition(priceRule);
           }
         }
