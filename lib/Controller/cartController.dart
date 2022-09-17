@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 import 'package:maxprint_final/Api/connector.dart';
+import 'package:maxprint_final/Controller/homeController.dart';
 import 'package:maxprint_final/Helper/global.dart';
 import 'package:maxprint_final/Model/LineItem.dart';
 import 'package:maxprint_final/Model/MyOrder.dart';
@@ -16,6 +17,24 @@ class CartController extends GetxController {
   double sub_total=0.0,shipping = 0.0 ;
   var myOrd = <MyOrder>[].obs;
   List <LineItem> line_items_api = <LineItem>[];
+  HomeController homeController = Get.find();
+
+
+  int getCollectionId(String tag){
+    for(int i=0 ;i <homeController.collection.length;i++){
+
+      if(homeController.collection[i].rules != null){
+        print('*-*-*');
+        for(int j = 0 ;j<homeController.collection[i].rules!.length;j++){
+          if(homeController.collection[i].rules![j].condition!=null && tag.contains(homeController.collection[i].rules[j].condition!)){
+            return homeController.collection[i].id!;
+          }
+        }
+      }
+
+    }
+    return -1;
+  }
 
   getTotal() {
     double x=0;
@@ -94,11 +113,11 @@ class CartController extends GetxController {
           }
         }
         //todo collection_id
-        // for(int elm in priceRule.entitledCollectionIds){
-        //   if(elm == product.collection_id){
-        //     return qtySubTotalCondition(priceRule);
-        //   }
-        // }
+        for(int elm in priceRule.entitledCollectionIds){
+          if(elm == getCollectionId(product.tags!)){
+            return qtySubTotalCondition(priceRule);
+          }
+        }
         return false;
       }
     }else{
