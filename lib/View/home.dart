@@ -30,6 +30,9 @@ class Home extends StatelessWidget {
       DeviceOrientation.portraitDown,
     ]);
     return Obx((){
+      SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+          statusBarColor: AppColors.mainColor,
+      ));
       return Scaffold(
           key: homeController.key,
           drawer: DrawerWidget.drawer(context),
@@ -71,7 +74,8 @@ class Home extends StatelessWidget {
   _btn_nav_bar(BuildContext context) {
     return Obx(() => Container(
       width: MediaQuery.of(context).size.width,
-      height: 50,
+      height: 55,
+      padding: const EdgeInsets.only(bottom: 7),
       decoration: BoxDecoration(
         color: AppColors.mainColor,
         borderRadius: const BorderRadius.only(
@@ -199,7 +203,7 @@ class Home extends StatelessWidget {
         children: [
           SizedBox(
               width: MediaQuery.of(context).size.width,
-              height: MediaQuery.of(context).size.height * 0.08,
+              height: MediaQuery.of(context).size.height * 0.07,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -282,7 +286,7 @@ class Home extends StatelessWidget {
           const SizedBox(height: 5),
           Container(
             width: MediaQuery.of(context).size.width,
-            height: MediaQuery.of(context).size.height * 0.15,
+            height: MediaQuery.of(context).size.height * 0.14,
             decoration: const BoxDecoration(
                 image: DecorationImage(
                     image: AssetImage('assets/home/homePicture.PNG',),
@@ -394,8 +398,8 @@ class Home extends StatelessWidget {
                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 2,
                     childAspectRatio: 0.7/0.8,
-                    crossAxisSpacing: 5,
-                    mainAxisSpacing: 5
+                    crossAxisSpacing: 10,
+                    mainAxisSpacing: 10
                 ),
                 itemCount: homeController.products.length > 10 ? 10 : homeController.products.length,
                 itemBuilder: (BuildContext ctx, index) {
@@ -464,12 +468,25 @@ class Home extends StatelessWidget {
         },
         child: Stack(
           children: [
-            Card(
-              color: Colors.white,
+            Container(
+              padding: const EdgeInsets.only(bottom: 10),
+              decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(5),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.grey.withOpacity(0.5),
+                    spreadRadius: 1,
+                    blurRadius: 2,
+                    offset: const Offset(0, 3), // changes position of shadow
+                  ),
+                ],
+              ),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   Expanded(
+                    flex: 2,
                     child:Hero(
                       tag: "product-"+product.id.toString(),
                       child: Container(
@@ -491,21 +508,25 @@ class Home extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
                           Expanded(
-                            flex: 2,
+                            flex: 1,
                             child: SizedBox(
                               width: MediaQuery.of(context).size.width * 0.4,
-                              child: Text(
-                                product.title.toString(),
-                                maxLines: 2,
-                                style: const TextStyle(
-                                  color: Colors.black,
-                                  fontSize: 12,
+                              child: Align(
+                                alignment: Alignment.centerLeft,
+                                child: Text(
+                                  product.title.toString(),
+                                  maxLines: 2,
+                                  style: const TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 12,
+                                  ),
                                 ),
-                              ),
+                              )
                             ),
                           ),
+                          const SizedBox(height: 5),
                           Expanded(
-                            flex: 2,
+                            flex: 1,
                             child: SizedBox(
                               width: MediaQuery.of(context).size.width * 0.4,
                               child: Row(

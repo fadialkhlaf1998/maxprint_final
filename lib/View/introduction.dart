@@ -27,23 +27,36 @@ class _IntroductionState extends State<Introduction> {
       DeviceOrientation.portraitUp,
       DeviceOrientation.portraitDown,
     ]);
+    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+      statusBarColor: Colors.transparent,
+    ));
+    // SystemChrome.setEnabledSystemUIMode(
+    //     SystemUiMode.leanBack,
+    // );
     return Scaffold(
-      body: SafeArea(
-        child: Container(
-          width: MediaQuery.of(context).size.width,
-          height: MediaQuery.of(context).size.height,
-          color: AppColors.mainColor,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Container(
+      body: Container(
+        width: MediaQuery.of(context).size.width,
+        height: MediaQuery.of(context).size.height,
+        decoration: const BoxDecoration(
+            image: DecorationImage(
+              fit: BoxFit.cover,
+            image: AssetImage('assets/images/background.png')
+          )
+        ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Hero(
+              tag: 'logo',
+              child: Container(
+                key: ValueKey('1'),
                 child: SvgPicture.asset("assets/logo/logo.svg",
                 width: 50,
                 height: 50,
                 ),
-              )
-            ],
-          ),
+              ),
+            )
+          ],
         ),
       ),
     );

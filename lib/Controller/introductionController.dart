@@ -56,15 +56,15 @@ class IntroController extends GetxController {
   move(){
   Global.loadInfo().then((info) {
     if(info.email=="non"){
-      Get.offAll(()=> SignIn());
+     Get.offNamed('/signIn');
     }else{
       Connector.check_internet().then((internet) {
         if(internet){
           Api.login(info.email,info.password).then((value) {
             if(value!= null){
-                Get.offAll(()=>Home());
+               Get.offAll(()=>Home());
             }else{
-              Get.offAll(()=> SignIn());
+             Get.offNamed('/signIn');
             }
           });
         }else{

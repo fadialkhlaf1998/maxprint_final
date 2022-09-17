@@ -9,6 +9,7 @@ import 'package:maxprint_final/View/drawer/about.dart';
 import 'package:maxprint_final/View/drawer/help_and_support.dart';
 import 'package:maxprint_final/View/drawer/languages.dart';
 import 'package:maxprint_final/View/drawer/policies.dart';
+import 'package:maxprint_final/View/signIn.dart';
 import 'package:maxprint_final/View/welcome.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -148,7 +149,7 @@ class DrawerWidget {
               GestureDetector(
                 onTap: () {
                   Global.logout();
-                  Get.offAll(()=>const Welcome());
+                  Get.offAll(()=> SignIn());
                 },
                 child: Container(
                   color: Colors.transparent,
