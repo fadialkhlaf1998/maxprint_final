@@ -3,6 +3,8 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_navigation/src/extension_navigation.dart';
+import 'package:maxprint_final/Api/connector.dart';
+import 'package:maxprint_final/Api/new_api.dart';
 import 'package:maxprint_final/Const/app_localization.dart';
 import 'package:maxprint_final/Const/app_widget.dart';
 import 'package:maxprint_final/Model/Customer.dart';
@@ -49,6 +51,20 @@ class Global {
       prefs.setString("email", email);
       prefs.setString("pass", password);
     });
+  }
+
+  static saveDiscountCode(String code) {
+    SharedPreferences.getInstance().then((prefs) {
+      prefs.setString("discount_code", code);
+    });
+  }
+  static Future<String> loadDiscountCode() async{
+    var prefs = await SharedPreferences.getInstance();
+    String code = prefs.getString("discount_code")??"";
+    if(code.isNotEmpty){
+      await Connector.discountCode(code);
+    }
+    return code;
   }
 
   static Future<SaveInformation> loadInfo() async {
