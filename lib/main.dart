@@ -4,10 +4,11 @@ import 'package:get/get.dart';
 import 'dart:math';
 import 'package:maxprint_final/Const/app_localization.dart';
 import 'package:maxprint_final/Controller/cartController.dart';
-import 'package:maxprint_final/Controller/productViewConroller.dart';
+import 'package:maxprint_final/Controller/productViewController.dart';
 import 'package:maxprint_final/Controller/wishlistController.dart';
 import 'package:maxprint_final/Helper/global.dart';
 import 'package:maxprint_final/View/introduction.dart';
+import 'package:maxprint_final/View/signIn.dart';
 
 void main() {
   runApp(const MyApp());
@@ -57,8 +58,16 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
+      getPages: [
+        GetPage(
+            name: '/signIn',
+            page: ()=> SignIn(),
+           transition: Transition.fadeIn,
+          transitionDuration: const Duration(milliseconds: 700),
+          curve: Curves.fastOutSlowIn
+        )
+      ],
       title: 'maxprint_final',
-
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         /// todo

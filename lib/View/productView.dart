@@ -1,7 +1,4 @@
-import 'dart:io';
-
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_html/flutter_html.dart';
@@ -11,7 +8,7 @@ import 'package:maxprint_final/Const/app_localization.dart';
 import 'package:maxprint_final/Const/app_widget.dart';
 import 'package:maxprint_final/Const/appcolors.dart';
 import 'package:maxprint_final/Controller/homeController.dart';
-import 'package:maxprint_final/Controller/productViewConroller.dart';
+import 'package:maxprint_final/Controller/productViewController.dart';
 import 'package:maxprint_final/Controller/wishlistController.dart';
 import 'package:maxprint_final/Helper/global.dart';
 import 'package:maxprint_final/Model/Product.dart';
@@ -64,7 +61,7 @@ class ProductView extends StatelessWidget {
   _header(BuildContext context) {
     return Container(
       width: MediaQuery.of(context).size.width,
-      height: MediaQuery.of(context).size.height * 0.08,
+      height: MediaQuery.of(context).size.height * 0.07,
       decoration: BoxDecoration(
         color: AppColors.mainColor,
         border: Border(
@@ -144,17 +141,17 @@ class ProductView extends StatelessWidget {
                       viewportFraction: 1,
                       autoPlay: product.images!.length <= 1 ? false : true,
                       enlargeCenterPage: true,
-                      scrollDirection: Axis.vertical,
+                      scrollDirection: Axis.horizontal,
                       onPageChanged: (index, reason) => productController.setIndex(index),
                     ),
                     itemCount: product.images!.length,
                     itemBuilder: (BuildContext context, int index, int realIndex) {
                       return Padding(
-                          padding: const EdgeInsets.all(10),
+                          padding: const EdgeInsets.only(bottom: 10),
                           child:  Container(
                             width: MediaQuery.of(context).size.width,
                             decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10),
+                            //  borderRadius: BorderRadius.circular(10),
                               image: DecorationImage(
                                 fit: BoxFit.cover,
                                 image: NetworkImage(product.image == null
@@ -328,7 +325,7 @@ class ProductView extends StatelessWidget {
   _Description(BuildContext context) {
     return Column(
       children: [
-        SizedBox(
+        Container(
           width: MediaQuery.of(context).size.width * 0.9,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -371,7 +368,7 @@ class ProductView extends StatelessWidget {
             productController.uploadDesign();
           },
           child: Container(
-            width: MediaQuery.of(context).size.width * 0.4 + 70,
+            width: MediaQuery.of(context).size.width * 0.8,
             height: 50,
             decoration: BoxDecoration(
                 color: Colors.grey,
@@ -379,9 +376,9 @@ class ProductView extends StatelessWidget {
             ),
             child: Center(
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const SizedBox(width: 10,),
+                  const Icon(Icons.upload_file,size: 30,color: Colors.transparent),
                   productController.uploadFiles.isEmpty
                       ? AppWidget.appText(App_Localization.of(context).translate("upload_design"),
                           Colors.white, 18,FontWeight.normal)
@@ -492,6 +489,7 @@ class ProductView extends StatelessWidget {
       ],
     );
   }
+
   _cart(BuildContext context) {
     return Container(
       width: MediaQuery.of(context).size.width * 0.4 + 70,
@@ -508,19 +506,11 @@ class ProductView extends StatelessWidget {
             ),
             child: IconButton(
               onPressed: () async {
-                /// todo
-                /// check if i upload design to this order
-                productController.checkProductId(product.id!, context, product);
-                 // await Global.getUploadDesignUrls().then((value){
-                 //   print('-------------------');
-                 //   print(value.urlsList.length);
-                 //   print('-------------------');
-                 //   if(value.urlsList.isNotEmpty){
-                 //     productController.addToCart(context,product);
-                 //   }else{
-                 //     showDialog(context);
-                 //   }
-                 // });
+                // showDialog(context);
+                bool value = await productController.checkProductId(product.id!, context, product);
+                if(!value){
+                   showDialog(context);
+                }
               },
               icon: Icon(Icons.shopping_cart_outlined,size: 25,color: AppColors.mainColor),
             ),
@@ -562,7 +552,7 @@ class ProductView extends StatelessWidget {
         Get.to(() => NeedDesign());
       },
       child: Container(
-        width: MediaQuery.of(context).size.width * 0.7,
+        width: MediaQuery.of(context).size.width * 0.8,
         height: 50,
         decoration: BoxDecoration(
             color: AppColors.mainColor,
@@ -573,7 +563,9 @@ class ProductView extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                const Icon(Icons.add, size: 0),
+                Container(
+                  width: 30,
+                ),
                 AppWidget.appText(App_Localization.of(context).translate("need_design"),
                     Colors.black, 15,FontWeight.normal),
                 Container(
@@ -594,7 +586,7 @@ class ProductView extends StatelessWidget {
         Get.to(() => CustomizeOrder());
       },
       child: Container(
-        width: MediaQuery.of(context).size.width * 0.7,
+        width: MediaQuery.of(context).size.width * 0.8,
         height: 50,
         decoration: BoxDecoration(
             color: AppColors.mainColor,
@@ -605,11 +597,13 @@ class ProductView extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                const Icon(Icons.add, size: 0),
+                Container(
+                  width: 30,
+                ),
                 AppWidget.appText(App_Localization.of(context).translate("customize_this_order"),
                     Colors.black, 15,FontWeight.normal),
                 Container(
-                  margin: EdgeInsets.symmetric(horizontal: 10),
+                  margin: const EdgeInsets.symmetric(horizontal: 10),
                   width: 30,
                   height: 30,
                   child: SvgPicture.asset('assets/customize.svg',color: Colors.black,),

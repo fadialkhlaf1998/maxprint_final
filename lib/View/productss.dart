@@ -52,7 +52,7 @@ class Productss extends StatelessWidget {
                       GestureDetector(
                         onTap: () {
                           Get.back();
-                          Get.back();
+                          // Get.back();
                         },
                         child: Container(
                           width: MediaQuery.of(context).size.width * 0.5,
@@ -73,10 +73,10 @@ class Productss extends StatelessWidget {
                   ),
                 ) :
                 Padding(
-                  padding: const EdgeInsets.only(left: 15,right: 15,top: 10),
+                  padding: const EdgeInsets.only(left: 15,right: 15),
                   child: SingleChildScrollView(
-                    child: SizedBox(
-                      height: MediaQuery.of(context).size.height - MediaQuery.of(context).size.height * 0.3,
+                    child: Container(
+                      height: MediaQuery.of(context).size.height - MediaQuery.of(context).size.height * 0.16 - MediaQuery.of(context).padding.bottom - MediaQuery.of(context).padding.top,
                       child: GridView.builder(
                         //  physics: const NeverScrollableScrollPhysics(),
                           shrinkWrap: true,
@@ -103,17 +103,19 @@ class Productss extends StatelessWidget {
   _header(BuildContext context) {
     return Container(
       width: MediaQuery.of(context).size.width,
-      height: MediaQuery.of(context).size.height * 0.18,
+      height: MediaQuery.of(context).size.height * 0.16,
       decoration: BoxDecoration(
         color: AppColors.mainColor,
-        border: Border.all(width: 1, color: Colors.grey.withOpacity(0.5))
+        border: Border(
+          bottom: BorderSide(width: 1, color: Colors.grey.withOpacity(0.5))
+        )
       ),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
           SizedBox(
               width: MediaQuery.of(context).size.width,
-              height: MediaQuery.of(context).size.height * 0.1,
+              height: MediaQuery.of(context).size.height * 0.08,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -209,6 +211,7 @@ class Productss extends StatelessWidget {
         homeController.goToProductPage(product);
       },
       child: Card(
+        margin: const EdgeInsets.only(bottom: 10,right: 5,left: 5,top: 5),
         elevation: 5,
         color: Colors.white,
         child: Column(
@@ -216,7 +219,7 @@ class Productss extends StatelessWidget {
           children: [
             Expanded(
               child:Hero(
-                tag: "product-"+product.id.toString(),
+                tag: "product-${product.id}",
                 child: Container(
                   width: MediaQuery.of(context).size.width * 0.5,
                   decoration: BoxDecoration(

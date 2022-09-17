@@ -64,7 +64,15 @@ class Wishlist extends StatelessWidget {
                 bottomLeft: Radius.circular(30),
                 bottomRight: Radius.circular(30),
               ),
-                border: Border.all(width: 1, color: Colors.grey.withOpacity(0.5))
+                // border: Border.all(width: 1, color: Colors.grey.withOpacity(0.5)),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.grey.withOpacity(0.5),
+                  spreadRadius: 1,
+                  blurRadius: 0,
+                  offset: const Offset(0, 0), // changes position of shadow
+                ),
+              ],
             ),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,

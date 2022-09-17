@@ -45,7 +45,7 @@ class HomeController extends GetxController {
       });
     }else{
       introController.get_collections();
-      getData();
+      // getData();
     }
   }
 

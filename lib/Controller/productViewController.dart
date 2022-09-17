@@ -151,15 +151,16 @@ class ProductViewController extends GetxController {
     return allDesign;
   }
   
-  checkProductId(int id, context, product) async {
+  Future<bool> checkProductId(int id, context, product) async {
     List<UploadDesign> loadDesignList = await loadUploadDesign();
     for(var upload in loadDesignList){
       if(upload.productId == id){
         addToCart(context, product);
-        return;
+        return true;
       }
     }
-    AppWidget.errorMsg(context, App_Localization.of(context).translate('you_must_upload_design'));
+    return false;
+    // AppWidget.errorMsg(context, App_Localization.of(context).translate('you_must_upload_design'));
   }
 
 }
