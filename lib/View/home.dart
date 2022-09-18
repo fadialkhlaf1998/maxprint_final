@@ -506,7 +506,7 @@ class Home extends StatelessWidget {
                     Expanded(
                       flex: 2,
                       child: Container(
-                        padding: EdgeInsets.symmetric(horizontal: 5),
+                        padding: const EdgeInsets.symmetric(horizontal: 5),
                         width: MediaQuery.of(context).size.width * 0.5,
                         child: Text(
                           product.title.toString(),
