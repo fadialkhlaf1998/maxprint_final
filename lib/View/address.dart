@@ -110,7 +110,7 @@ class Address extends StatelessWidget {
                     Center(
                         child: AppWidget.appText(
                             App_Localization.of(context).translate("dear") + ", " +
-                                Global.user!.firstName! + " " + Global.user!.lastName! , Colors.black, 16, FontWeight.w500)
+                                Global.user!.firstName + " " + Global.user!.lastName , Colors.black, 16, FontWeight.w500)
                     ),
                     Center(
                       child: AppWidget.appText(

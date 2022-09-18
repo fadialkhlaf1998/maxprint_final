@@ -34,6 +34,13 @@ class Home extends StatelessWidget {
           statusBarColor: AppColors.mainColor,
       ));
       return Scaffold(
+        appBar: PreferredSize(
+          preferredSize: Size.fromHeight(0),
+          child: AppBar(
+            backgroundColor: AppColors.mainColor,
+            elevation: 0,
+          )
+        ),
           key: homeController.key,
           drawer: DrawerWidget.drawer(context),
           bottomNavigationBar: _btn_nav_bar(context),
@@ -74,8 +81,8 @@ class Home extends StatelessWidget {
   _btn_nav_bar(BuildContext context) {
     return Obx(() => Container(
       width: MediaQuery.of(context).size.width,
-      height: 55,
-      padding: const EdgeInsets.only(bottom: 7),
+      height: 60,
+      padding: const EdgeInsets.only(bottom: 15),
       decoration: BoxDecoration(
         color: AppColors.mainColor,
         borderRadius: const BorderRadius.only(
