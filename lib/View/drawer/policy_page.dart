@@ -20,6 +20,13 @@ class PolicyPage extends StatelessWidget {
       DeviceOrientation.portraitDown,
     ]);
     return Scaffold(
+      appBar: PreferredSize(
+          preferredSize: const Size.fromHeight(0),
+          child: AppBar(
+            backgroundColor: AppColors.mainColor,
+            elevation: 0,
+          )
+      ),
       body: SafeArea(
         child: Container(
           width: MediaQuery.of(context).size.width,
@@ -40,15 +47,21 @@ class PolicyPage extends StatelessWidget {
   _header(BuildContext context){
     return Container(
       width: MediaQuery.of(context).size.width,
-      height: MediaQuery.of(context).size.height * 0.18,
+      height: MediaQuery.of(context).size.height * 0.15,
       decoration: BoxDecoration(
         color: AppColors.mainColor,
         borderRadius: const BorderRadius.only(
             bottomLeft: Radius.circular(30),
             bottomRight:Radius.circular(30)
         ),
-        border: Border.all(width: 1, color: Colors.grey.withOpacity(0.5))
-      ),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.grey.withOpacity(0.5),
+            spreadRadius: 1,
+            blurRadius: 0,
+            offset: const Offset(0, 0), // changes position of shadow
+          ),
+        ],      ),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [

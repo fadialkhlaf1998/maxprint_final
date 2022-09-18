@@ -22,6 +22,13 @@ class CreateAddress extends StatelessWidget {
       DeviceOrientation.portraitDown,
     ]);
     return Obx(() => Scaffold(
+      appBar: PreferredSize(
+          preferredSize: const Size.fromHeight(0),
+          child: AppBar(
+            backgroundColor: AppColors.mainColor,
+            elevation: 0,
+          )
+      ),
       body: SafeArea(
         child: Container(
           width: MediaQuery.of(context).size.width,

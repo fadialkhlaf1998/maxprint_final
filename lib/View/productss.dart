@@ -27,6 +27,13 @@ class Productss extends StatelessWidget {
       DeviceOrientation.portraitDown,
     ]);
     return Scaffold(
+      appBar: PreferredSize(
+          preferredSize: const Size.fromHeight(0),
+          child: AppBar(
+            backgroundColor: AppColors.mainColor,
+            elevation: 0,
+          )
+      ),
       body: SafeArea(
         child: SizedBox(
           width: MediaQuery.of(context).size.width,

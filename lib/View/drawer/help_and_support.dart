@@ -17,6 +17,13 @@ class HelpSupportPage extends StatelessWidget {
       DeviceOrientation.portraitDown,
     ]);
     return Scaffold(
+      appBar: PreferredSize(
+          preferredSize: const Size.fromHeight(0),
+          child: AppBar(
+            backgroundColor: AppColors.mainColor,
+            elevation: 0,
+          )
+      ),
       body: SafeArea(
         child: Container(
           width: MediaQuery.of(context).size.width,
@@ -37,14 +44,21 @@ class HelpSupportPage extends StatelessWidget {
   _header(BuildContext context){
     return Container(
       width: MediaQuery.of(context).size.width,
-      height: MediaQuery.of(context).size.height * 0.25,
+      height: MediaQuery.of(context).size.height * 0.2,
       decoration: BoxDecoration(
         color: AppColors.mainColor,
         borderRadius: const BorderRadius.only(
             bottomLeft: Radius.circular(30),
             bottomRight:Radius.circular(30)
         ),
-        border: Border.all(width: 1, color: Colors.grey.withOpacity(0.5))
+        boxShadow: [
+          BoxShadow(
+            color: Colors.grey.withOpacity(0.5),
+            spreadRadius: 1,
+            blurRadius: 0,
+            offset: const Offset(0, 0), // changes position of shadow
+          ),
+        ],
       ),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
@@ -56,7 +70,7 @@ class HelpSupportPage extends StatelessWidget {
                   onPressed: () => Get.back(),
                   icon: const Icon(Icons.arrow_back,color: Colors.black,size: 28,)),
               Container(
-                  height: MediaQuery.of(context).size.height * 0.15,
+                  height: MediaQuery.of(context).size.height * 0.12,
                   color: AppColors.mainColor,
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
