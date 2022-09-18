@@ -34,13 +34,13 @@ class Home extends StatelessWidget {
           statusBarColor: AppColors.mainColor,
       ));
       return Scaffold(
-        appBar: PreferredSize(
-          preferredSize: Size.fromHeight(0),
-          child: AppBar(
-            backgroundColor: AppColors.mainColor,
-            elevation: 0,
-          )
-        ),
+            appBar: PreferredSize(
+            preferredSize: const Size.fromHeight(0),
+            child: AppBar(
+              backgroundColor: AppColors.mainColor,
+              elevation: 0.0,
+            ),
+          ),
           key: homeController.key,
           drawer: DrawerWidget.drawer(context),
           bottomNavigationBar: _btn_nav_bar(context),
@@ -82,7 +82,7 @@ class Home extends StatelessWidget {
     return Obx(() => Container(
       width: MediaQuery.of(context).size.width,
       height: 60,
-      padding: const EdgeInsets.only(bottom: 15),
+      padding: const EdgeInsets.only(bottom: 15, top: 5),
       decoration: BoxDecoration(
         color: AppColors.mainColor,
         borderRadius: const BorderRadius.only(
@@ -405,8 +405,8 @@ class Home extends StatelessWidget {
                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 2,
                     childAspectRatio: 0.7/0.8,
-                    crossAxisSpacing: 10,
-                    mainAxisSpacing: 10
+                    crossAxisSpacing: 5,
+                    mainAxisSpacing: 5
                 ),
                 itemCount: homeController.products.length > 10 ? 10 : homeController.products.length,
                 itemBuilder: (BuildContext ctx, index) {
@@ -468,7 +468,134 @@ class Home extends StatelessWidget {
         )
     );
   }
+
   _products(Product product,BuildContext context,int index) {
+    return GestureDetector(
+      onTap: () {
+        homeController.goToProductPage(product);
+      },
+      child: Card(
+        margin: const EdgeInsets.only(bottom: 10,right: 5,left: 5,top: 5),
+        elevation: 5,
+        color: Colors.white,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            Expanded(
+              child:Hero(
+                tag: "product-${product.id}",
+                child: Container(
+                  width: MediaQuery.of(context).size.width * 0.5,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(5),
+                    border: Border.all(width: 1, color: Colors.grey.withOpacity(0.5)),
+                    image: DecorationImage(
+                      fit: BoxFit.cover,
+                      image: NetworkImage(product.image == null
+                          ? "https://tahoban.ru/wp-content/themes/consultix/images/no-image-found-360x250.png"
+                          : product.image!.src.toString()),
+                    ),
+                  ),
+                ),
+              ),),
+            const SizedBox(height: 5,),
+            Expanded(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Expanded(
+                      flex: 2,
+                      child: Container(
+                        padding: EdgeInsets.symmetric(horizontal: 5),
+                        width: MediaQuery.of(context).size.width * 0.5,
+                        child: Text(
+                          product.title.toString(),
+                          maxLines: 2,
+                          style: const TextStyle(
+                            color: Colors.black,
+                            fontSize: 13,
+                          ),
+                        ),
+                      ),
+                    ),
+                    Expanded(
+                      flex: 2,
+                      child: SizedBox(
+                        width: MediaQuery.of(context).size.width * 0.4,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: [
+                                double.parse(product.variants!.first.price!) == 0 ?
+                                Center(
+                                  child: Text(
+                                      App_Localization.of(context).translate('contact_us_for_price'),
+                                      style: const TextStyle(
+                                          fontSize: 12,
+                                          color: Colors.black
+                                      )
+                                  ),
+                                ) :
+                                Expanded(
+                                  flex: 1,
+                                  child: AppWidget.appText(product.variants!.first.price.toString() + " " +
+                                      App_Localization.of(context).translate("AED"),
+                                      Colors.black, 13, FontWeight.bold),
+                                ),
+                                Expanded(
+                                  flex: 1,
+                                  child: Text(
+                                    product.variants!.first.compareAtPrice == null ? "" :
+                                    product.variants!.first.compareAtPrice.toString() + " " +
+                                        App_Localization.of(context).translate("AED"),
+                                    style: const TextStyle(
+                                      color: Colors.black,
+                                      fontSize: 12,
+                                      decoration: TextDecoration.lineThrough,
+                                    ),
+                                  ),
+                                )
+                              ],
+                            ),
+                            Obx(() => GestureDetector(
+                              onTap: () {
+                                homeController.products[index].favorite.value = ! homeController.products[index].favorite.value;
+                                if ( homeController.products[index].favorite.value) {
+                                  wishlistController.addToWishlist(homeController.products[index]);
+                                }
+                                else {
+                                  wishlistController.deleteFromWishlist(homeController.products[index]);
+                                }
+                              },
+                              child:  !homeController.products[index].favorite.value
+                                  ? const Icon(
+                                Icons.favorite_border,
+                                color: Colors.red,
+                                size: 25,
+                              )
+                                  : const Icon(
+                                Icons.favorite_outlined,
+                                color: Colors.red,
+                                size: 25,
+                              ),
+                            ))
+                          ],
+                        ),
+                      ),
+                    )
+                  ],
+                )
+            )
+          ],
+        ),
+      ),
+    );
+  }
+
+  _products1(Product product,BuildContext context,int index) {
     return GestureDetector(
         onTap: () {
           homeController.goToProductPage(product);
@@ -566,7 +693,7 @@ class Home extends StatelessWidget {
                                               + App_Localization.of(context).translate("AED"),
                                           style: const TextStyle(
                                             color: Colors.black,
-                                            fontSize: 12,
+                                            fontSize: 10,
                                             decoration: TextDecoration.lineThrough,
                                           ),
                                         ),

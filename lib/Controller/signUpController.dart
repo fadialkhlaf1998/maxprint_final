@@ -47,31 +47,40 @@ class SignUpController extends GetxController {
   signUp(BuildContext context, String fName, String lName,String email, String pass) {
     print('-------------------');
     try{
-      if(!RegExp(r'\S+@\S+\.\S+').hasMatch(email)|| email.isEmpty || pass.isEmpty || fName.isEmpty || lName.isEmpty || pass.length<6){
+      if(!RegExp(r'\S+@\S+\.\S+').hasMatch(email)|| email.isEmpty || pass.isEmpty || fName.isEmpty || lName.isEmpty || pass.length<6 || confirmPassword.text != pass){
         if(email.isEmpty || !RegExp(r'\S+@\S+\.\S+').hasMatch(email)){
           emailValidate.value=false;
+          AppWidget.errorMsg(context,App_Localization.of(context).translate("wrong_mail"));
         }else{
           emailValidate.value=true;
         }
         if(pass.isEmpty||pass.length<6){
-          if(pass.length<6&&pass.isNotEmpty){
+          if(pass.length < 6 && pass.isNotEmpty){
             AppWidget.errorMsg(context, App_Localization.of(context).translate("wrong_password"));
             passValidate.value=false;
           }else{
             passValidate.value=false;
+            AppWidget.errorMsg(context, App_Localization.of(context).translate("wrong_password"));
           }
+        }
+        if(pass != confirmPassword.text){
+          AppWidget.errorMsg(context, App_Localization.of(context).translate("passwords_not_match"));
+          passValidate.value=false;
         }else{
           passValidate.value=true;
         }
-        if(fName.isEmpty){
-          firstNameValidate.value=false;
-        }else{
-          firstNameValidate.value=true;
-        }
         if(lName.isEmpty){
           lastNameValidate.value=false;
+          AppWidget.errorMsg(context,App_Localization.of(context).translate("last_name_empty"));
+
         }else{
           lastNameValidate.value=true;
+        }
+        if(fName.isEmpty){
+          firstNameValidate.value=false;
+          AppWidget.errorMsg(context,App_Localization.of(context).translate("name_empty"));
+        }else{
+          firstNameValidate.value=true;
         }
       }else{
         Connector.check_internet().then((internet) {

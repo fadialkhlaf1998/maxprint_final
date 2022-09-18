@@ -167,6 +167,7 @@
     "sign_in" : "Sign In",
     "have_account" : "Have Account",
     "wrong_password": "Password must be 6 characters at least",
+    "wrong_mail": "Email is wrong or empty",
     "sign_up_success": "Sign up has been Successfully",
     "sign_up_failed": "This email already used",
     "something_wrong": "Something went wrong",
@@ -205,5 +206,8 @@
   "add_to_cart" : "Add to cart",
   "contact_us_for_price" : "Contact us for price",
   "upload_failed" : "Upload Failed",
-  "upload_successfully" : "Upload successfully"
+  "upload_successfully" : "Upload successfully",
+  "name_empty" : "first name field is required",
+  "last_name_empty" : "Last name field is required",
+  "passwords_not_match" : "Passwords do not match"
 }

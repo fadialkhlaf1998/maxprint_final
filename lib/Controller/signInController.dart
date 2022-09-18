@@ -31,12 +31,15 @@ class SignInController extends GetxController {
 
   signIn(BuildContext context, String email, String pass){
     try{
-      if(email.isEmpty||pass.isEmpty||!RegExp(r'\S+@\S+\.\S+').hasMatch(email)){
-        if(email.isEmpty||!RegExp(r'\S+@\S+\.\S+').hasMatch(email)){
+      if(email.isEmpty || pass.isEmpty || !RegExp(r'\S+@\S+\.\S+').hasMatch(email)){
+        if(email.isEmpty || !RegExp(r'\S+@\S+\.\S+').hasMatch(email)){
           emailValidate.value=false;
+          AppWidget.errorMsg(context,App_Localization.of(context).translate("wrong_mail"));
         }
-        if(pass.isEmpty){
+        else if(pass.isEmpty){
           passValidate.value=false;
+          AppWidget.errorMsg(context,App_Localization.of(context).translate("wrong_password"));
+
         }
       }else{
         Connector.check_internet().then((internet) {

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:lottie/lottie.dart';
 import 'package:maxprint_final/Const/app_localization.dart';
 import 'package:maxprint_final/Const/app_widget.dart';
 import 'package:maxprint_final/Const/appcolors.dart';
@@ -34,6 +35,11 @@ class SignUp extends StatelessWidget {
       DeviceOrientation.portraitUp,
       DeviceOrientation.portraitDown,
     ]);
+    SystemChrome.setSystemUIOverlayStyle(
+        const SystemUiOverlayStyle(
+            statusBarColor: Colors.transparent,
+            statusBarIconBrightness: Brightness.dark
+        ));
     return Obx((){
       return  Scaffold(
         body: SingleChildScrollView(
@@ -62,8 +68,12 @@ class SignUp extends StatelessWidget {
                   width: MediaQuery.of(context).size.width,
                   height: MediaQuery.of(context).size.height,
                   color: Colors.white.withOpacity(0.4),
-                  child: const Center(
-                    child: CircularProgressIndicator(),
+                  child: Center(
+                    child: SizedBox(
+                      width: 60,
+                      height: 60,
+                      child: Lottie.asset('assets/animation/Loading.json'),
+                    ),
                   ),
                 ) : const Text('')
               ],
@@ -102,7 +112,6 @@ class SignUp extends StatelessWidget {
          child:  customButton(context, 0.5, 45, App_Localization.of(context).translate('create_my_account'),
              Colors.black, BorderRadius.circular(10), 16, AppColors.mainColor, FontWeight.bold,
                  () {
-                   print('terst teststest ');
             signUpController.signUp(context, signUpController.firstName.text, signUpController.lastName.text, signUpController.email.text, signUpController.password.text);
              }),
        ),

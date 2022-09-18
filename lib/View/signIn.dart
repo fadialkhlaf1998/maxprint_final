@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:lottie/lottie.dart';
 import 'package:maxprint_final/Const/app_localization.dart';
 import 'package:maxprint_final/Const/app_widget.dart';
 import 'package:maxprint_final/Const/appcolors.dart';
@@ -36,8 +37,8 @@ class SignIn extends StatelessWidget {
       DeviceOrientation.portraitDown,
     ]);
     SystemChrome.setSystemUIOverlayStyle(
-        SystemUiOverlayStyle(
-      statusBarColor: AppColors.secondaryColor,
+       const SystemUiOverlayStyle(
+      statusBarColor: Colors.transparent,
             statusBarIconBrightness: Brightness.dark
     ));
     return Obx((){
@@ -69,8 +70,12 @@ class SignIn extends StatelessWidget {
                   width: MediaQuery.of(context).size.width,
                   height: MediaQuery.of(context).size.height,
                   color: Colors.white.withOpacity(0.4),
-                  child: const Center(
-                    child: CircularProgressIndicator(),
+                  child: Center(
+                    child: SizedBox(
+                      width: 60,
+                      height: 60,
+                      child: Lottie.asset('assets/animation/Loading.json'),
+                    ),
                   ),
                 ) : const Text('')
               ],

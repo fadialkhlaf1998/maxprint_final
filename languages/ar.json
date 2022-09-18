@@ -166,6 +166,7 @@
     "sign_in" : "تسجيل الدخول",
     "have_account" : "لديك حساب",
     "wrong_password": "يجب أن تتكون كلمة المرور من 6 أحرف على الأقل",
+    "wrong_mail": "البريد الالكتروني فارغ أو غير صالح",
     "sign_up_success": "تم الاشتراك بنجاح",
     "sign_up_failed": "هذا البريد الإلكتروني مستخدم بالفعل",
     "something_wrong": "هناك خطأ ما",
@@ -204,7 +205,10 @@
   "add_to_cart" : "أضف الى عربة التسوق",
   "contact_us_for_price" : "اتصل بنا لمعرفة السعر",
   "upload_failed" : "فشل الرفع",
-  "upload_successfully" : "نجح الرفع"
+  "upload_successfully" : "نجح الرفع",
+  "name_empty" : "حقل الاسم الاول ضروري",
+  "last_name_empty" : "حقل الاسم الاخير ضروري",
+  "passwords_not_match" : "كلمات المرور غير متطابقة"
 
 
 
