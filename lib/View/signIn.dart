@@ -42,40 +42,38 @@ class SignIn extends StatelessWidget {
     ));
     return Obx((){
       return Scaffold(
-        body:SafeArea(
-          child: SingleChildScrollView(
-            child: Container(
-              color: AppColors.secondaryColor,
-              width: MediaQuery.of(context).size.width,
-              height: MediaQuery.of(context).size.height,
-              child: Stack(
-                alignment: Alignment.center,
-                children: [
-                  SizedBox(
-                    width: MediaQuery.of(context).size.width,
-                    height: MediaQuery.of(context).size.height,
-                    child: SvgPicture.asset('assets/images/background1.svg',fit: BoxFit.cover,),
+        body:SingleChildScrollView(
+          child: Container(
+            color: AppColors.secondaryColor,
+            width: MediaQuery.of(context).size.width,
+            height: MediaQuery.of(context).size.height,
+            child: Stack(
+              alignment: Alignment.center,
+              children: [
+                SizedBox(
+                  width: MediaQuery.of(context).size.width,
+                  height: MediaQuery.of(context).size.height,
+                  child: SvgPicture.asset('assets/images/background1.svg',fit: BoxFit.cover,),
+                ),
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    _logo(),
+                    const SizedBox(height: 30),
+                    _inputTextField(context),
+                  ],
+                ),
+                signInController.loading.value ?
+                Container(
+                  width: MediaQuery.of(context).size.width,
+                  height: MediaQuery.of(context).size.height,
+                  color: Colors.white.withOpacity(0.4),
+                  child: const Center(
+                    child: CircularProgressIndicator(),
                   ),
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      _logo(),
-                      const SizedBox(height: 30),
-                      _inputTextField(context),
-                    ],
-                  ),
-                  signInController.loading.value ?
-                  Container(
-                    width: MediaQuery.of(context).size.width,
-                    height: MediaQuery.of(context).size.height,
-                    color: Colors.white.withOpacity(0.4),
-                    child: const Center(
-                      child: CircularProgressIndicator(),
-                    ),
-                  ) : const Text('')
-                ],
-              ),
+                ) : const Text('')
+              ],
             ),
           ),
         ),
