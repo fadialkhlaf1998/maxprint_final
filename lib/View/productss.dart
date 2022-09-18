@@ -126,7 +126,7 @@ class Productss extends StatelessWidget {
                       icon: const Icon(Icons.arrow_back,size: 28,)),
                   GestureDetector(
                     onTap: () {
-                      Get.off(() => Home());
+                    //  Get.off(() => Home());
                     },
                     child: SvgPicture.asset("assets/logo/logo.svg",
                       width: 25,
@@ -265,6 +265,16 @@ class Productss extends StatelessWidget {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               mainAxisAlignment: MainAxisAlignment.start,
                               children: [
+                                double.parse(product.variants!.first.price!) == 0 ?
+                                Center(
+                                  child: Text(
+                                      App_Localization.of(context).translate('contact_us_for_price'),
+                                      style: const TextStyle(
+                                          fontSize: 12,
+                                          color: Colors.black
+                                      )
+                                  ),
+                                ) :
                                 Expanded(
                                   flex: 1,
                                   child: AppWidget.appText(product.variants!.first.price.toString() + " " +

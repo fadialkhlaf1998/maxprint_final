@@ -488,7 +488,7 @@ class Home extends StatelessWidget {
                   Expanded(
                     flex: 2,
                     child:Hero(
-                      tag: "product-"+product.id.toString(),
+                      tag: "product-${product.id}",
                       child: Container(
                         width: MediaQuery.of(context).size.width * 0.5,
                         decoration: BoxDecoration(
@@ -518,7 +518,7 @@ class Home extends StatelessWidget {
                                   maxLines: 2,
                                   style: const TextStyle(
                                     color: Colors.black,
-                                    fontSize: 12,
+                                    fontSize: 13,
                                   ),
                                 ),
                               )
@@ -536,6 +536,15 @@ class Home extends StatelessWidget {
                                     crossAxisAlignment: CrossAxisAlignment.start,
                                     mainAxisAlignment: MainAxisAlignment.start,
                                     children: [
+                                      double.parse( product.variants!.first.price!) == 0
+                                          ? Text(
+                                        App_Localization.of(context).translate('contact_us_for_price'),
+                                        style: const TextStyle(
+                                            fontSize: 12,
+                                          color: Colors.black
+                                        )
+                                      )
+                                          :
                                       Expanded(
                                         flex: 1,
                                           child: AppWidget.appText(product.variants!.first.price.toString() + " " +

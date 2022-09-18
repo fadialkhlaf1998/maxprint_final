@@ -45,7 +45,12 @@ class CreateAddress extends StatelessWidget {
     return Container(
         width: MediaQuery.of(context).size.width,
         height: MediaQuery.of(context).size.height * 0.08,
-        color: AppColors.mainColor,
+        decoration: BoxDecoration(
+            color: AppColors.mainColor,
+            border: Border(
+                bottom: BorderSide(width: 1, color: Colors.grey.withOpacity(0.5))
+            )
+        ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
@@ -153,7 +158,7 @@ class CreateAddress extends StatelessWidget {
                                     prefix: const Text("+971 "),
                                     prefixStyle: const TextStyle(color: Colors.transparent,fontSize: 15),
                                     enabledBorder: addressController.phoneValidate.value&&addressController.phone.value.text.isEmpty?const UnderlineInputBorder(borderSide: BorderSide(color: Colors.red)):const UnderlineInputBorder(borderSide: BorderSide(color: Colors.grey)),
-                                    focusedBorder: UnderlineInputBorder(borderSide: BorderSide(color: AppColors.mainColor))
+                                    focusedBorder: const UnderlineInputBorder(borderSide: BorderSide(color: Colors.black))
                                 ),
                                 style: AppWidget.textFieldStyle(Colors.black, 15),
                               ),

@@ -64,7 +64,9 @@ class Categories extends StatelessWidget {
       height: MediaQuery.of(context).size.height * 0.18,
       decoration: BoxDecoration(
         color: AppColors.mainColor,
-        border: Border.all(width: 1, color: Colors.grey.withOpacity(0.5))
+        border: Border(
+            bottom: BorderSide(width: 1, color: Colors.grey.withOpacity(0.5))
+        )
       ),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,

@@ -80,13 +80,12 @@ class Cart extends StatelessWidget {
                   bottomLeft: Radius.circular(30),
                   bottomRight: Radius.circular(30),
                 ),
-                // border: Border.all(width: 1, color: Colors.grey.withOpacity(0.5)),
               boxShadow: [
                 BoxShadow(
                   color: Colors.grey.withOpacity(0.5),
                   spreadRadius: 1,
                   blurRadius: 0,
-                  offset: const Offset(0, 0), // changes position of shadow
+                  offset: const Offset(0, 0),
                 ),
               ],
             ),
@@ -174,7 +173,17 @@ class Cart extends StatelessWidget {
                                               Row(
                                                 mainAxisAlignment: MainAxisAlignment.start,
                                                 children: [
-                                                  AppWidget.appText("${double.parse(cartController.myOrd[index].product.value.variants!.first.price!) * cartController.myOrd[index].quantity.value}"
+                                                  double.parse(cartController.myOrd[index].product.value.variants!.first.price!) == 0
+                                                      ? Center(
+                                                    child: Text(
+                                                        App_Localization.of(context).translate('contact_us_for_price'),
+                                                        style: const TextStyle(
+                                                            fontSize: 12,
+                                                            color: Colors.black
+                                                        )
+                                                    ),
+                                                  )
+                                                      : AppWidget.appText("${double.parse(cartController.myOrd[index].product.value.variants!.first.price!) * cartController.myOrd[index].quantity.value}"
                                                       " ${App_Localization.of(context).translate("AED")}",
                                                       Colors.black, 15, FontWeight.bold),
                                                 ],

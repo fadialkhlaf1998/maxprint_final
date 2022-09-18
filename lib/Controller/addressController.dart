@@ -47,7 +47,7 @@ class AddressController extends GetxController {
     loading.value = true;
     Connector.check_internet().then((internet) {
       if(internet) {
-        Connector.get_address(Global.customer!).then((value) {
+        Connector.get_address(Global.user!).then((value) {
           if(value.isNotEmpty) {
             addresses.clear();
             addresses.addAll(value);

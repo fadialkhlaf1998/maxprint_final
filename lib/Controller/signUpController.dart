@@ -15,12 +15,14 @@ class SignUpController extends GetxController {
   TextEditingController lastName = TextEditingController();
   TextEditingController email = TextEditingController();
   TextEditingController password = TextEditingController();
+  TextEditingController confirmPassword = TextEditingController();
   TextEditingController phone = TextEditingController();
   var firstNameValidate = true.obs;
   var lastNameValidate = true.obs;
   var emailValidate = true.obs;
   var passValidate = true.obs;
   var hidePassword = true.obs;
+  var hideConfirmPassword = true.obs;
   var loading = false.obs;
 
   clearTextFields(){
@@ -38,7 +40,12 @@ class SignUpController extends GetxController {
     hidePassword.value = !hidePassword.value;
   }
 
+  void hideConfirmVisibility(){
+    hideConfirmPassword.value = !hideConfirmPassword.value;
+  }
+
   signUp(BuildContext context, String fName, String lName,String email, String pass) {
+    print('-------------------');
     try{
       if(!RegExp(r'\S+@\S+\.\S+').hasMatch(email)|| email.isEmpty || pass.isEmpty || fName.isEmpty || lName.isEmpty || pass.length<6){
         if(email.isEmpty || !RegExp(r'\S+@\S+\.\S+').hasMatch(email)){

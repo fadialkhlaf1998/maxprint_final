@@ -86,7 +86,26 @@ class Api {
     else {
       return [];
     }
+  }
 
+  static Future forgetPassword(String email) async {
+    var headers = {
+      'Content-Type': 'application/json'
+    };
+    var request = http.Request('POST', Uri.parse('$url/forgot-password'));
+    request.body = json.encode({
+      "email": email
+    });
+    request.headers.addAll(headers);
+
+    http.StreamedResponse response = await request.send();
+
+    if (response.statusCode == 200) {
+      return true;
+    }
+    else {
+      return false;
+    }
   }
 
 }

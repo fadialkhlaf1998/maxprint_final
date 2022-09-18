@@ -103,7 +103,7 @@ class ProductView extends StatelessWidget {
         productController.uploadFiles.isEmpty ? const Center()
             : _design_files_list(context),
         const SizedBox(height: 10),
-        _cart(context),
+        _newCart(context),
         const SizedBox(height: 10),
         _need_design(context),
         const SizedBox(height: 10),
@@ -273,13 +273,25 @@ class ProductView extends StatelessWidget {
         AppWidget.divider(0.5, Colors.grey.withOpacity(0.5), 20, 20),
         Container(
           width: MediaQuery.of(context).size.width * 0.9,
+          height: 50,
+          padding: const EdgeInsets.all(5),
           decoration: BoxDecoration(
             color: Colors.grey.withOpacity(0.3),
             borderRadius: BorderRadius.circular(5)
           ),
-          child: Padding(
-            padding: const EdgeInsets.all(5),
-            child: Column(
+          child:
+            double.parse( product.variants!.first.price!) == 0
+                ? Center(
+              child: Text(
+                  App_Localization.of(context).translate('contact_us_for_price'),
+                  style: const TextStyle(
+                      fontSize: 15,
+                      color: Colors.black
+                  )
+              ),
+            )
+                :
+            Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Row(
@@ -315,7 +327,6 @@ class ProductView extends StatelessWidget {
                 ),
               ],
             ),
-          ),
         ),
         AppWidget.divider(0.5, Colors.grey.withOpacity(0.5), 20, 20),
         const SizedBox(height: 10),
@@ -381,7 +392,7 @@ class ProductView extends StatelessWidget {
                   const Icon(Icons.upload_file,size: 30,color: Colors.transparent),
                   productController.uploadFiles.isEmpty
                       ? AppWidget.appText(App_Localization.of(context).translate("upload_design"),
-                          Colors.white, 18,FontWeight.normal)
+                          Colors.white, 17,FontWeight.normal)
                   :  AppWidget.appText(App_Localization.of(context).translate("add_more"),
                       Colors.white, 18,FontWeight.normal),
                   IconButton(
@@ -459,7 +470,7 @@ class ProductView extends StatelessWidget {
         ),
         GestureDetector(
           onTap: (){
-            productController.uploadFileToServer(product.id!);
+            productController.uploadFileToServer(product.id!, context);
           },
           child: Container(
             width: MediaQuery.of(context).size.width * 0.4,
@@ -469,7 +480,12 @@ class ProductView extends StatelessWidget {
                 borderRadius: BorderRadius.circular(10)
             ),
             child: Center(
-              child: Text(
+              child: productController.uploadLoading.value ?
+               const SizedBox(
+                 width: 20,
+                   height: 20,
+                   child: CircularProgressIndicator(color: Colors.white,))
+                  : Text(
                 App_Localization.of(context).translate('upload'),
                 style: const TextStyle(
                     fontSize: 14,
@@ -490,6 +506,44 @@ class ProductView extends StatelessWidget {
     );
   }
 
+  _newCart(BuildContext context){
+    return GestureDetector(
+      onTap: () async  {
+        bool value = await productController.checkProductId(product.id!, context, product);
+        if(!value){
+          showDialog(context);
+        }
+      },
+      child: Container(
+        width: MediaQuery.of(context).size.width * 0.8,
+        height: 50,
+        decoration: BoxDecoration(
+            color: Colors.black,
+            borderRadius: BorderRadius.circular(10),
+            border: Border.all(width: 1, color: Colors.grey.withOpacity(0.5))
+        ),
+        child: Center(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Container(
+                  width: 30,
+                ),
+                AppWidget.appText(App_Localization.of(context).translate("add_to_cart"),
+                    AppColors.mainColor, 17,FontWeight.bold),
+                Container(
+                  margin: const EdgeInsets.symmetric(horizontal: 10),
+                  width: 30,
+                  height: 30,
+                  child: Icon(Icons.shopping_cart_outlined,size: 25,color: AppColors.mainColor),
+
+        )
+              ],
+            )
+        ),
+      ),
+    );
+  }
   _cart(BuildContext context) {
     return Container(
       width: MediaQuery.of(context).size.width * 0.4 + 70,

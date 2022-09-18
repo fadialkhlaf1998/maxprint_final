@@ -29,6 +29,7 @@ class ProductViewController extends GetxController {
   var phoneValidate = false.obs;
   RxList<File> uploadFiles = <File>[].obs;
   RxBool uploadFileCheck = false.obs;
+  RxBool uploadLoading = false.obs;
 
   setIndex(int selected){
     activeIndex.value=selected;
@@ -106,16 +107,20 @@ class ProductViewController extends GetxController {
     });
   }
 
-  uploadFileToServer(int productId) async {
+  uploadFileToServer(int productId, context) async {
+    uploadLoading.value = true;
     await Api.uploadPhoto(uploadFiles).then((value) async {
       if(value.isNotEmpty){
         print('Success');
         await saveUploadDesignUrls(productId, value);
         uploadFiles.clear();
         uploadFileCheck.value = true;
-        // await saveUploadDesignUrls(productId, value);
+        uploadLoading.value = false;
+        AppWidget.successMsg(context, App_Localization.of(context).translate('upload_successfully'));
       }else{
         print('Field');
+        AppWidget.errorMsg(context, App_Localization.of(context).translate('upload_failed'));
+        uploadLoading.value = false;
       }
     });
   }

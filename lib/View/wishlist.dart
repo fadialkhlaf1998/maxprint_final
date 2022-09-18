@@ -140,6 +140,15 @@ class Wishlist extends StatelessWidget {
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 children: [
+                                  double.parse(wishlistController.wishlist[index].variants!.first.price!) == 0
+                                  ?  Text(
+                                      App_Localization.of(context).translate('contact_us_for_price'),
+                                      style: const TextStyle(
+                                          fontSize: 12,
+                                          color: Colors.black
+                                      )
+                                  )
+                                      :
                                   Container(
                                     child: AppWidget.appText(wishlistController.wishlist[index].variants!.first.price.toString() + " AED",
                                         Colors.black, 15, FontWeight.bold),

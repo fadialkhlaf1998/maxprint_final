@@ -54,7 +54,9 @@ class Checkout extends StatelessWidget {
         height: MediaQuery.of(context).size.height * 0.08,
         decoration: BoxDecoration(
           color: AppColors.mainColor,
-          border: Border.all(width: 1, color: Colors.grey.withOpacity(0.5))
+          border: Border(
+            bottom: BorderSide(width: 1, color: Colors.grey.withOpacity(0.5))
+          )
         ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -119,7 +121,7 @@ class Checkout extends StatelessWidget {
               width: MediaQuery.of(context).size.width * 0.35,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(30),
-                border: Border.all(color: AppColors.mainColor,width: 2),
+                border: Border.all(color: Colors.black,width: 1),
               ),
               child: Center(
                   child: AppWidget.appText(
@@ -258,7 +260,7 @@ class Checkout extends StatelessWidget {
                                   prefix: const Text("+971 "),
                                   prefixStyle: const TextStyle(color: Colors.transparent,fontSize: 15),
                                   enabledBorder: checkoutController.noAddress.value&&checkoutController.phoneValidate.value?const UnderlineInputBorder(borderSide: BorderSide(color: Colors.red)):const UnderlineInputBorder(borderSide: BorderSide(color: Colors.grey)),
-                                  focusedBorder: UnderlineInputBorder(borderSide: BorderSide(color: AppColors.mainColor))
+                                  focusedBorder: UnderlineInputBorder(borderSide: BorderSide(color: Colors.black))
                               ),
                               style: AppWidget.textFieldStyle(Colors.black, 15),
                             ),

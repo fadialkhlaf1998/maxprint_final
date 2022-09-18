@@ -41,8 +41,12 @@ class ContactDesigner extends StatelessWidget {
     return Container(
         width: MediaQuery.of(context).size.width,
         height: MediaQuery.of(context).size.height * 0.08,
-        color: AppColors.mainColor,
-        child: Row(
+        decoration: BoxDecoration(
+            color: AppColors.mainColor,
+            border: Border(
+                bottom: BorderSide(width: 1, color: Colors.grey.withOpacity(0.5))
+            )
+        ),        child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             IconButton(

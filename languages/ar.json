@@ -196,6 +196,18 @@
     "optional": "اختياري",
   "add_more" : "أضف المزيد",
   "upload" : "تحميل",
-  "you_must_upload_design" : "يجب عليك تحميل تصميم أولاً"
+  "you_must_upload_design" : "يجب عليك تحميل تصميم أولاً",
+  "new_user_sign_up_here" : "مستخدم جديد؟ اشترك هنا",
+  "forget_password" : "نسيت كلمة المرور ؟",
+  "create_my_account" : "إنشاء حساب",
+  "already_have_account" : "تملك حساباً ؟ تسجيل الدخول هنا",
+  "add_to_cart" : "أضف الى عربة التسوق",
+  "contact_us_for_price" : "اتصل بنا لمعرفة السعر",
+  "upload_failed" : "فشل الرفع",
+  "upload_successfully" : "نجح الرفع"
+
+
+
+
 
 }

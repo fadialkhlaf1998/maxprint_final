@@ -9,6 +9,7 @@ import 'package:maxprint_final/Controller/wishlistController.dart';
 import 'package:maxprint_final/Helper/global.dart';
 import 'package:maxprint_final/View/introduction.dart';
 import 'package:maxprint_final/View/signIn.dart';
+import 'package:maxprint_final/View/signUp.dart';
 
 void main() {
   runApp(const MyApp());
@@ -55,6 +56,8 @@ class _MyAppState extends State<MyApp> {
     });
   }
 
+
+
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
@@ -63,9 +66,16 @@ class _MyAppState extends State<MyApp> {
             name: '/signIn',
             page: ()=> SignIn(),
            transition: Transition.fadeIn,
-          transitionDuration: const Duration(milliseconds: 700),
+          transitionDuration: const Duration(milliseconds: 1000),
           curve: Curves.fastOutSlowIn
-        )
+        ),
+        GetPage(
+            name: '/signUp',
+            page: ()=> SignUp(),
+            transition: Transition.fadeIn,
+            transitionDuration: const Duration(milliseconds: 1000),
+            curve: Curves.fastOutSlowIn
+        ),
       ],
       title: 'maxprint_final',
       debugShowCheckedModeBanner: false,

@@ -16,6 +16,19 @@ class SignIn extends StatelessWidget {
   SignInController signInController = Get.put(SignInController());
   SignUpController signUpController = Get.put(SignUpController());
 
+  Widget _flightShuttleBuilder(
+      BuildContext flightContext,
+      Animation<double> animation,
+      HeroFlightDirection flightDirection,
+      BuildContext fromHeroContext,
+      BuildContext toHeroContext,
+      ) {
+    return DefaultTextStyle(
+      style: DefaultTextStyle.of(toHeroContext).style,
+      child: toHeroContext.widget,
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     SystemChrome.setPreferredOrientations([
@@ -52,6 +65,15 @@ class SignIn extends StatelessWidget {
                       _inputTextField(context),
                     ],
                   ),
+                  signInController.loading.value ?
+                  Container(
+                    width: MediaQuery.of(context).size.width,
+                    height: MediaQuery.of(context).size.height,
+                    color: Colors.white.withOpacity(0.4),
+                    child: const Center(
+                      child: CircularProgressIndicator(),
+                    ),
+                  ) : const Text('')
                 ],
               ),
             ),
@@ -85,17 +107,83 @@ class SignIn extends StatelessWidget {
             fontWeight: FontWeight.bold
           ),
         ),
-        const SizedBox(height: 20),
+        const SizedBox(height: 40),
         customTextField(context,'email',signInController.email, false, 'email', false),
         const SizedBox(height: 10),
-        customTextField(context,'lock',signInController.password, signInController.hidePassword.value, 'password', true)
+        customTextField(context,'lock',signInController.password, signInController.hidePassword.value, 'password', true),
+        const SizedBox(height: 10),
+        GestureDetector(
+          onTap: (){
+
+          },
+          child: Container(
+            color: Colors.transparent,
+            width: MediaQuery.of(context).size.width * 0.8,
+            child: Align(
+              alignment: Alignment.centerRight,
+              child: Text(
+                App_Localization.of(context).translate('forget_password'),
+                style: const TextStyle(
+                  color: Colors.black,
+                  fontSize: 12
+                ),
+              ),
+            ),
+          ),
+        ),
+        const SizedBox(height: 30),
+        Hero(
+          flightShuttleBuilder: _flightShuttleBuilder,
+
+          tag: 'singInButton',
+          child: customButton(
+            context,
+            0.5,
+            45,
+            App_Localization.of(context).translate('sign_in'),
+            Colors.black,
+            BorderRadius.circular(10),
+            16,
+            AppColors.mainColor,
+            FontWeight.bold,
+                (){
+              signInController.signIn(context, signInController.email.text, signInController.password.text);
+            },
+          ),
+        ),
+        Container(
+          padding: const EdgeInsets.symmetric(vertical: 20),
+          child: Center(
+            child: Text(
+                App_Localization.of(context).translate('or'),
+              style: const TextStyle(
+                fontSize: 14,
+                color: Colors.black
+              ),
+            ),
+          ),
+        ),
+        customButton(
+            context,
+            0.5,
+            20,
+            App_Localization.of(context).translate('new_user_sign_up_here'),
+            Colors.transparent,
+            BorderRadius.circular(10),
+            13,
+            Colors.black,
+            FontWeight.normal,
+            (){
+            Get.offNamed('/signUp');
+            }
+            ),
       ],
     );
   }
 
   customTextField(context, String icon, TextEditingController controller, bool obscure,String text, bool password){
     return Container(
-      width: MediaQuery.of(context).size.width * 0.7,
+      width: MediaQuery.of(context).size.width * 0.8,
       height: 50,
       child: Row(
         children: [
@@ -113,7 +201,7 @@ class SignIn extends StatelessWidget {
             child: Image.asset('assets/icons/$icon.png'),
           ),
           Container(
-            width: MediaQuery.of(context).size.width * 0.58,
+            width: MediaQuery.of(context).size.width * 0.68,
             height: 50,
             padding: const EdgeInsets.only(left: 5),
             decoration: BoxDecoration(
@@ -130,7 +218,7 @@ class SignIn extends StatelessWidget {
                 decoration: InputDecoration(
                   // contentPadding: const EdgeInsets.only(left: 5),
                   hintText: App_Localization.of(context).translate(text),
-                  hintStyle: const TextStyle(color:Colors.black, fontSize: 14),
+                  hintStyle: TextStyle(color:Colors.black.withOpacity(0.8), fontSize: 14),
                   enabledBorder: InputBorder.none,
                   focusedBorder: InputBorder.none,
                   suffixIcon: password ? InkWell(
@@ -148,6 +236,30 @@ class SignIn extends StatelessWidget {
               ),
           ),
         ],
+      ),
+    );
+  }
+
+  customButton(context, double width, double height, String text, Color boxColor, BorderRadius radius, double fontSize, Color textColor, FontWeight fontWeight, VoidCallback onTap){
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        width: MediaQuery.of(context).size.width * width,
+        height: height,
+        decoration: BoxDecoration(
+            borderRadius: radius,
+            color: boxColor
+        ),
+        child: Center(
+          child: Text(
+            text,
+            style: TextStyle(
+                fontSize: fontSize,
+                color: textColor,
+                fontWeight: fontWeight
+            ),
+          ),
+        ),
       ),
     );
   }
