@@ -51,4 +51,5 @@ class WishlistController extends GetxController {
     return false;
   }
 
+
 }

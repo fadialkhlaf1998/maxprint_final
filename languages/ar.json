@@ -208,7 +208,11 @@
   "upload_successfully" : "نجح الرفع",
   "name_empty" : "حقل الاسم الاول ضروري",
   "last_name_empty" : "حقل الاسم الاخير ضروري",
-  "passwords_not_match" : "كلمات المرور غير متطابقة"
+  "passwords_not_match" : "كلمات المرور غير متطابقة",
+  "address1_empty" : "حقل العنوان الأول ضروري",
+  "address2_empty" : "حقل العنوان الثاني ضروري",
+  "country_empty" : "حقل البلد ضروري",
+  "emirate_empty" : "حقل الإمارة ضروري"
 
 
 

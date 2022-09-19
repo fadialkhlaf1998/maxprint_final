@@ -209,5 +209,9 @@
   "upload_successfully" : "Upload successfully",
   "name_empty" : "first name field is required",
   "last_name_empty" : "Last name field is required",
-  "passwords_not_match" : "Passwords do not match"
+  "passwords_not_match" : "Passwords do not match",
+  "address1_empty" : "Address1 field is required",
+  "address2_empty" : "Address2 field is required",
+  "country_empty" : "Country field is required",
+  "emirate_empty" : "Emirate field is required"
 }

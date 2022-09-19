@@ -5,6 +5,9 @@ import 'package:maxprint_final/Const/app_localization.dart';
 import 'package:maxprint_final/Const/app_widget.dart';
 import 'package:maxprint_final/Const/appcolors.dart';
 import 'package:maxprint_final/Controller/wishlistController.dart';
+import 'package:maxprint_final/Helper/global.dart';
+import 'package:maxprint_final/View/signIn.dart';
+import 'package:maxprint_final/View/signUp.dart';
 
 class Wishlist extends StatelessWidget {
   Wishlist({Key? key}) : super(key: key);
@@ -29,6 +32,61 @@ class Wishlist extends StatelessWidget {
                 child: Column(
                   children: [
                     const SizedBox(height: 50),
+                    // Global.user == null ?
+                    // SizedBox(
+                    //   height: MediaQuery.of(context).size.height * 0.4,
+                    //   child: Column(
+                    //     mainAxisAlignment: MainAxisAlignment.center,
+                    //     children: [
+                    //       AppWidget.appText(App_Localization.of(context).translate("please_login_first"), Colors.black, 18, FontWeight.normal),
+                    //       const SizedBox(height: 10,),
+                    //       Row(
+                    //         mainAxisAlignment: MainAxisAlignment.center,
+                    //         children: [
+                    //           GestureDetector(
+                    //             onTap: (){
+                    //               Get.to(()=>SignUp());
+                    //             },
+                    //             child: Container(
+                    //               width: MediaQuery.of(context).size.width*0.3,
+                    //               height: 35,
+                    //               decoration: BoxDecoration(
+                    //                   color: AppColors.mainColor,
+                    //                   borderRadius: BorderRadius.circular(20),
+                    //                   border: Border.all(width: 1, color: Colors.grey.withOpacity(0.5))
+                    //
+                    //               ),
+                    //               child: Center(
+                    //                 child: AppWidget.appText(App_Localization.of(context).translate("sign_up"), Colors.black, 15, FontWeight.normal),
+                    //               ),
+                    //             ),
+                    //           ),
+                    //           const SizedBox(width: 10),
+                    //           AppWidget.appText(App_Localization.of(context).translate("or"), Colors.black, 18, FontWeight.bold),
+                    //           const SizedBox(width: 10),
+                    //           GestureDetector(
+                    //             onTap: (){
+                    //               Get.to(()=>SignIn());
+                    //             },
+                    //             child: Container(
+                    //               width: MediaQuery.of(context).size.width*0.3,
+                    //               height: 35,
+                    //               decoration: BoxDecoration(
+                    //                   color: AppColors.mainColor,
+                    //                   borderRadius: BorderRadius.circular(20),
+                    //                   border: Border.all(width: 1, color: Colors.grey.withOpacity(0.5))
+                    //               ),
+                    //               child: Center(
+                    //                 child: AppWidget.appText(App_Localization.of(context).translate("sign_in"), Colors.black, 15, FontWeight.normal),
+                    //               ),
+                    //             ),
+                    //           )
+                    //         ],
+                    //       )
+                    //
+                    //     ],
+                    //   ),
+                    // ) :
                     wishlistController.wishlist.isEmpty ?
                         Center(
                           child: Container(

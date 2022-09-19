@@ -35,20 +35,40 @@ class CheckoutController extends GetxController {
 
   next(BuildContext context){
     if(selected.value == 0){
-      if(firstName.value.text.isEmpty||lastName.value.text.isEmpty||address1.value.text.isEmpty||
-          address2.value.text.isEmpty||phone.value.text.isEmpty||country=="non"||emirate=="non" || phone.text.length < 9){
+      // if(firstName.value.text.isEmpty||lastName.value.text.isEmpty||address1.value.text.isEmpty||
+      //     address2.value.text.isEmpty||phone.value.text.isEmpty||country=="non"||emirate=="non" || phone.text.length < 9){
+      //   noAddress.value = true;
+      // }else{
+      //   selected.value ++;
+      //   noAddress.value = false;
+      // }
+      if(firstName.text.isEmpty){
+        AppWidget.errorMsg(context, App_Localization.of(context).translate("name_empty"));
         noAddress.value = true;
-      }else{
-        selected.value ++;
-      }
-      if(phone.text.isEmpty || phone.text.length < 9){
+      }else if(lastName.text.isEmpty){
+        AppWidget.errorMsg(context, App_Localization.of(context).translate("last_name_empty"));
+        noAddress.value = true;
+      }else if(address1.text.isEmpty){
+        AppWidget.errorMsg(context, App_Localization.of(context).translate("address1_empty"));
+        noAddress.value = true;
+      } else if(address2.text.isEmpty){
+        AppWidget.errorMsg(context, App_Localization.of(context).translate("address2_empty"));
+        noAddress.value = true;
+      } else if(country.value == "non"){
+        AppWidget.errorMsg(context, App_Localization.of(context).translate("country_empty"));
+        noAddress.value = true;
+      } else if(emirate.value == "non"){
+        AppWidget.errorMsg(context, App_Localization.of(context).translate("emirate_empty"));
+        noAddress.value = true;
+      } else if(phone.text.isEmpty || phone.text.length < 9){
         AppWidget.errorMsg(context, App_Localization.of(context).translate("wrong_phone"));
         phoneValidate.value = true;
         noAddress.value = true;
       }else{
         phoneValidate.value = false;
-        noAddress.value = false;
+        selected.value ++;
       }
+
     }else{
       if(!selectValue.value) {
         AppWidget.errorMsg(context,App_Localization.of(context).translate("complete_order"));

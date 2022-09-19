@@ -7,6 +7,7 @@ import 'package:maxprint_final/Const/app_widget.dart';
 import 'package:maxprint_final/Const/appcolors.dart';
 import 'package:maxprint_final/Controller/signInController.dart';
 import 'package:maxprint_final/Controller/signUpController.dart';
+import 'package:maxprint_final/View/home.dart';
 import 'package:maxprint_final/View/signUp.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -57,12 +58,31 @@ class SignIn extends StatelessWidget {
                   child: SvgPicture.asset('assets/images/background1.svg',fit: BoxFit.cover,),
                 ),
                 Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    _logo(),
-                    const SizedBox(height: 30),
-                    _inputTextField(context),
+                    SizedBox(height: 50,),
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        _logo(),
+                        const SizedBox(height: 30),
+                        _inputTextField(context),
+                      ],
+                    ),
+                    customButton(
+                        context,
+                        0.4,
+                        60,
+                        App_Localization.of(context).translate('continue'),
+                        Colors.transparent,
+                        BorderRadius.zero,
+                        13,
+                        Colors.black,
+                        FontWeight.normal,
+                            () {
+                              signInController.continueAsGuest();
+                            }),
                   ],
                 ),
                 signInController.loading.value ?
